@@ -124,6 +124,7 @@ switch (ENVIRONMENT)
 		define("PORTAL",$HostPath."portal.podomorouniversity.ac.id/");
 		define("blogs_url_file",$HostPath."adminblogs.podomorouniversity.ac.id/");
 		define("blogs_url",$HostPath."blogs.podomorouniversity.ac.id/");
+		define("puis_url",$HostPath."pcam.podomorouniversity/");
 		break;
 
 	default:
@@ -132,7 +133,8 @@ switch (ENVIRONMENT)
 		define("rest_base_uri",$HostPath."localhost/restserver/");
 		define("PORTAL",$HostPath."localhost/portal/");
 		define("blogs_url_file",$HostPath."localhost/blogscms/");
-		define("blogs_url",$HostPath."localhost/blogs/");
+		define("blogs_url",$HostPath."localhost/blogscms/");
+		define("puis_url",$HostPath."localhost/puis/");
 		break;
 }
 

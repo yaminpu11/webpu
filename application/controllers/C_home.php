@@ -15,22 +15,85 @@
         $this->load->library('curl');
         $this->load->helper('form');
         $this->load->library('pagination');
+        $this->load->model(array('Custom_model'));
+
+        $this->menu_nav = array();
+        $this->menu_nav = $this->Custom_model->getdata('db_webpu.menu_nav');
+
+        foreach ($this->menu_nav as $key => $value) 
+        {
+            $findsubmenu = $this->Custom_model->getdata('db_webpu.submenu_nav', array('id_menu_nav' => $value['id_menu_nav']), 'name_submenu_nav', 'ASC');
+
+            if (!empty($findsubmenu)) 
+            {
+                $this->menu_nav[$key]['submenu'] = $findsubmenu;
+            }
+            else
+            {
+                $this->menu_nav[$key]['submenu'] = '';
+            }
+        }
     }
 
 
     function index(){
 
         $client = new GuzzleHttp\Client();
-        $get_api = $this->client_rest->client_get('blogs/TrandingNews',[]);
+        $get_api = $this->client_rest->client_get('blogs/TrendingNews',[]);
         $getAnouncem_api = $this->client_rest->client_get('announcement/listAnnouncement',[]);
+        $getprodi = $this->client_rest->client_get('prodi/ProdiFront',[]);
+        $getcalendaracademic = $this->client_rest->client_get('academic/calendaracademic',[]);
+
+        $recomendnews = $this->client_rest->client_get('blogs/RecomentNews',[]);
+
+        $marketingactivity = $this->client_rest->client_get('marketing/MarketingActivity',['page' => 0, 'limit' => 10]);
+
         $currentPage = 01;
         $maxpage = 10;
         $response = $client->request('GET', 'https://newsapi.org/v2/top-headlines?country=id&page='.$currentPage.'&pageSize='.$maxpage.'&apiKey=96b7521327044529a95b04762e15d43e',[]);
         // $response = $client->request('GET', 'https://newsapi.org/v2/top-headlines?country=id&apiKey=96b7521327044529a95b04762e15d43e',[]);
         $d = json_decode($response->getBody()->getCOntents(),true);            
         $data['response'] = $get_api;
+        $data['ProdiList'] = $getprodi[0];
+        $data['ProdiSlider'] = $getprodi[1];
+        $data['ProdiAbout'] = $getprodi[2];
+        $data['ProdiHost'] = $getprodi[3];
         $data['newsapi'] = $d['articles'];
         $data['announcement'] = $getAnouncem_api;
+        $data['marketingactivity'] = $marketingactivity;
+
+        $calendar = array();
+        $calendar[0]['name'] = 'Kuliah';
+        $calendar[0]['date_start'] = $getcalendaracademic[1]['kuliahStart'];
+        $calendar[0]['date_end'] = $getcalendaracademic[1]['kuliahEnd'];
+
+        $calendar[1]['name'] = 'UTS';
+        $calendar[1]['date_start'] = $getcalendaracademic[1]['utsStart'];
+        $calendar[1]['date_end'] = $getcalendaracademic[1]['utsEnd'];
+
+        $calendar[2]['name'] = 'UAS';
+        $calendar[2]['date_start'] = $getcalendaracademic[1]['uasStart'];
+        $calendar[2]['date_end'] = $getcalendaracademic[1]['uasEnd'];
+
+        $calendar[3]['name'] = 'Seminar TA Registration';
+        $calendar[3]['date_start'] = $getcalendaracademic[1]['TARegStart'];
+        $calendar[3]['date_end'] = $getcalendaracademic[1]['TARegEnd'];
+
+        $calendar[4]['name'] = 'Penilaian Sarana Prasarana';
+        $calendar[4]['date_start'] = $getcalendaracademic[1]['edom2Start'];
+        $calendar[4]['date_end'] = $getcalendaracademic[1]['edom2End'];
+
+        $calendar[5]['name'] = 'Evaluasi Dosen Oleh Mahasiswa';
+        $calendar[5]['date_start'] = $getcalendaracademic[1]['edomStart'];
+        $calendar[5]['date_end'] = $getcalendaracademic[1]['edomEnd'];
+
+        $data['semester_name'] = $getcalendaracademic[0];
+        $data['calendar'] = $calendar;
+
+        // print "<pre>";
+        // print_r($data['ProdiSlider']);
+        // print "</pre>";
+        // die();
 
         //konfigurasi pagination
         $jumlah_data = $d['totalResults'];
@@ -86,10 +149,20 @@
 
 
     public function about(){ 
-        $this->load->view('page/V_about');
+        $data = array();
+        $data['prodi'] = $this->client_rest->client_get('prodi/ProdiFront',[]);
+
+        $content = $this->load->view('page/V_about',$data,true);
+        parent::template($content);
     }   
 
+    public function undergraduated_programs(){ 
+        $data = array();
+        $data['prodi'] = $this->client_rest->client_get('prodi/ProdiFront',[]);
 
+        $content = $this->load->view('page/V_undergraduated_programs',$data,true);
+        parent::template($content);
+    }   
   }
 
 ?>

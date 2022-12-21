@@ -169,7 +169,7 @@ a, button {
     z-index: 1;
     height: 100px;
     /*background-image: url(../img/banner/h1_hero.jpg) !important;*/
-    background-image: url(../img/banner/Yang-Dipelajari-di-Teknik-Sipil.webp) !important;
+    background-image: url(../banner.jpeg) !important;
     background-repeat: no-repeat;
     background-position: 45% center;
     background-size: cover;
@@ -251,7 +251,7 @@ a, button {
 }
 
 .masthead .primary-content .tagline {
-    font-size: 7.5rem;
+    font-size: 2.5rem;
     line-height: 0.95;
     line-height: 1.05;
     font-weight: 500;
@@ -838,3 +838,19 @@ a, button {
     border-color: #bd2130;
 }
 
+.page-holder {
+  min-height: 100vh;
+}
+
+.bg-cover {
+  background-size: cover !important;
+}
+
+.garisbawah:after {
+    display: block;
+    height: 2px;
+    background-color: #19B5FE;
+    content: ' ';
+    width: 150px;
+    margin-top: 10px;
+}

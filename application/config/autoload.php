@@ -61,7 +61,7 @@ $autoload['packages'] = array();
 // $autoload['libraries'] = array(); //default
 // $autoload['libraries'] = array('database', 'pagination');
 # Load the template library when the spark is loaded
-$autoload['libraries'] = array('email', 'session','client_rest');
+$autoload['libraries'] = array('email', 'session','client_rest', 'database');
 
 /*
 | -------------------------------------------------------------------

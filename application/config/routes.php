@@ -52,6 +52,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'c_home/index';
 $route['home'] = 'c_home/index';
 $route['about'] = 'c_home/about';
+$route['undergraduated_programs'] = 'c_home/undergraduated_programs';
+
+$route['information'] = 'c_information/index';
+
+$route['news'] = 'c_information/news';
+$route['news/category'] = 'c_information/news_category';
+$route['news/(:any)'] = 'c_information/news/$1';
+
+$route['marketing_activity'] = 'c_information/marketing_activity';
+$route['marketing_activity/(:any)'] = 'c_information/marketing_activity/$1';
+
+$route['announcement'] = 'c_information/announcement';
+$route['announcement/(:any)'] = 'c_information/announcement/$1';
+
+$route['world_article'] = 'c_information/world_article';
 
 $route['404_override'] = '';
 

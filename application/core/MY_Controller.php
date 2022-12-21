@@ -7,10 +7,13 @@ class MY_Controller extends CI_Controller {
     {
         parent::__construct();
 
+        $this->set = array();
+
         date_default_timezone_set('Asia/Jakarta');
         // Baca server name
         $ServerName = $_SERVER['SERVER_NAME'];
-        
+
+        $this->load->helper('general_helper');
     }
 
     public function template($content)

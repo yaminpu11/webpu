@@ -17,6 +17,10 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
     }
 
     function index(){
+        $data['prodi'] = $this->client_rest->client_get('prodi/ProdiFront',[]);
+        echo 123;
+        die();
+
         $content = $this->load->view('page/V_about',$data,true);
 
     }    

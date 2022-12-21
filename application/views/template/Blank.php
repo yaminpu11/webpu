@@ -12,7 +12,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest"> -->
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/pufavicon.png">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url();?>assets/img/pufavicon.png">
         <link
           rel="canonical"
           href="https://www.ampstart.com/templates/product-material-oak.amp"
@@ -31,14 +31,14 @@
         <link rel="stylesheet" href="<?= base_url();?>/assets/css/nice-select.css">
         <link rel="stylesheet" href="<?= base_url();?>/assets/css/style.css">
         <link rel="stylesheet" href="<?= base_url();?>/assets/css/style_pu.css">
-        <link rel="stylesheet" href="<?= base_url();?>/assets/amp/css/amp-source-compiled-css.css">
+        <!-- <link rel="stylesheet" href="<?= base_url();?>/assets/amp/css/amp-source-compiled-css.css"> -->
         <!-- <link rel="stylesheet" href="<?= base_url();?>/assets/css/custom.css"> -->
    </head>
 
     <body>
            
         <!-- Preloader Start -->
-        <div id="preloader-active">
+        <!-- <div id="preloader-active">
             <div class="preloader d-flex align-items-center justify-content-center">
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Preloader Start -->
 
         
@@ -75,8 +75,8 @@
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <div class="header-info-left">
                                         <ul>     
-                                            <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
-                                            <li><img src="assets/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
+                                            <li><img src="<?=base_url()?>assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
+                                            <li><img src="<?=base_url()?>assets/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
                                         </ul>
                                     </div>
                                     <div class="header-info-right">
@@ -96,12 +96,12 @@
                                 <!-- Logo -->
                                 <div class="col-xl-3 col-lg-3 col-md-3">
                                     <div class="logo">
-                                        <a href="index.html"><img src="assets/img/logo/new_logo_pu.png" alt=""></a>
+                                        <a href="<?=base_url()?>"><img src="<?=base_url()?>assets/img/logo/new_logo_pu.png" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xl-9 col-lg-9 col-md-9">
                                     <div class="header-banner f-right ">
-                                        <img src="assets/img/hero/BEASISWA8SEMESTER100.gif" alt="">
+                                        <img src="<?=base_url()?>assets/img/hero/BEASISWA8SEMESTER100.gif" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -120,8 +120,23 @@
                                     <div class="main-menu d-none d-md-block">
                                         <nav>                  
                                             <ul id="navigation">    
-                                                <li><a href="<?= base_url();?>">Home</a></li>
-                                                <li><a href="<?= base_url();?>index.php/about">About Us</a></li>
+                                                <?php foreach ($this->menu_nav as $key => $value): ?>
+                                                    <?php if (empty($value['submenu'])): ?>
+                                                        <li><a href="<?=$value['link_menu'];?>"><?=$value['name_menu_nav']?></a></li>
+                                                    <?php endif ?>
+                                                    <?php if (!empty($value['submenu'])): ?>
+                                                        <li><a href="<?=$value['link_menu'];?>"><?=$value['name_menu_nav']?></a>
+                                                            <ul class="submenu">
+                                                            <?php foreach ($value['submenu'] as $keysub => $valuesub): ?>
+                                                                <li><a href="<?=$valuesub['link_submenu']?>"><?=$valuesub['name_submenu_nav'];?></a></li>
+                                                            <?php endforeach ?>
+                                                            </ul>
+                                                        </li>
+                                                    <?php endif ?>
+                                                    
+                                                <?php endforeach ?>
+                                                
+                                                <!-- <li><a href="<?= base_url();?>index.php/about">About Us</a></li>
                                                 <li><a href="<?= base_url();?>reasearch">Reasearch</a></li>
                                                 <li><a href="#">Undergraduate Programs</a>
                                                     <ul class="submenu">
@@ -137,7 +152,7 @@
                                                 </li>
                                                 <li><a href="https://studentlife.podomorouniversity.ac.id/">Student Life</a></li>
                                                 <li><a href="https://admission.podomorouniversity.ac.id/">Admission & Registrasi</a></li>
-                                                <li><a href="https://portal.podomorouniversity.ac.id/">Portal</a></li>
+                                                <li><a href="https://portal.podomorouniversity.ac.id/">Portal</a></li> -->
                                             </ul>
                                         </nav>
                                     </div>
@@ -170,15 +185,14 @@
         
        <footer>
            <!-- Footer Start-->
-           <div class="footer-area footer-padding fix">
+            <!-- <div class="footer-area footer-padding fix">
                 <div class="container">
                     <div class="row d-flex justify-content-between">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <div class="single-footer-caption">
                                 <div class="single-footer-caption">
-                                    <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="index.html"><img src="assets/img/logo/logo-hitam-putih.png" alt=""></a>
+                                        <a href="index.html"><img src="<?=base_url()?>assets/img/logo/logo-hitam-putih.png" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -203,7 +217,7 @@
                                     <strong>Email:</strong> <span id="Email">info@podomorouniversity.ac.id</span><br>
                                     
                                 </p>
-                                <!-- <div class="instagram-gellay">
+                                <div class="instagram-gellay">
                                     <ul class="insta-feed">
                                         <li><a href="#"><img src="assets/img/post/instra1.jpg" alt=""></a></li>
                                         <li><a href="#"><img src="assets/img/post/instra2.jpg" alt=""></a></li>
@@ -212,7 +226,7 @@
                                         <li><a href="#"><img src="assets/img/post/instra5.jpg" alt=""></a></li>
                                         <li><a href="#"><img src="assets/img/post/instra6.jpg" alt=""></a></li>
                                     </ul>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -336,7 +350,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             
            <!-- footer-bottom aera -->
            <div class="footer-bottom-area">
@@ -423,6 +437,24 @@
                             document.getElementById('tagline').style.opacity = -currScrollPos2/400 + 2;
                             }
                         });
+
+            $('.carousel-responsive1').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:false,
+                autoplay:true,
+                responsive:{
+                    0:{
+                        items:2
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:5
+                    }
+                }
+            })
             </script>
     </body>
 </html>
